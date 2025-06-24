@@ -1,5 +1,4 @@
 <h1><%= @article.title %></h1>
-
 <p><%= @article.body %></p>
 
 <ul>
@@ -9,4 +8,9 @@
                     turbo_confirm: "Are you sure?"
                   } %></li>
 </ul>
+
+<%= link_to "See comments", article_comments_path(@article) %>
+<br>
+<%= link_to "Add comment", new_article_comment_path(@article) %>
+<br>
 <%= link_to "Home", articles_path %>
