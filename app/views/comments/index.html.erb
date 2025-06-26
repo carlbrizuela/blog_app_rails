@@ -1,4 +1,5 @@
-<h1><%= @article.title %></h1>
+<%= link_to "Back to article", article_path(@article) %>
+<br>
 
 <% flash.each do |type, msg| %>
   <div>
@@ -6,28 +7,37 @@
   </div>
 <% end %>
 
-<%= link_to "Back to article", article_path(@article) %>
+<h1><%= @article.title %></h1>
 
-<h1>Comments</h1>
-
-<% @article.comments.each do |comment| %>
-  <p>
-    <strong>Commenter:</strong>
-    <%= comment.commenter %>
-  </p>
-
-  <p>
-    <strong>Comment:</strong>
-    <%= comment.body %>
-    <ul>
-      <li><%= link_to "Edit", edit_article_comment_path(@article, comment) %></li>
-      <li><%= link_to "Delete", [comment.article, comment], data: {
-                      turbo_method: :delete,
-                      turbo_confirm: "Are you sure?"
-                    } %></li>
-    </ul>
-  </p>
+<h2>Comments</h2>
+<% if @article.comments.empty? %> 
+  <div>No comments</div> 
+  <br>
+<% else %>
+  <table>
+    <% @article.comments.each do |comment| %>
+      <tr>
+        <td>
+          <strong>Commenter:</strong>
+          <%= comment.commenter %>
+          <br>
+          <strong>Comment:</strong>
+          <%= comment.body %>
+        </td>
+        <td style="width:10%">
+          <%= link_to "Edit", edit_article_comment_path(@article, comment) %>
+          <%= link_to "Delete", [comment.article, comment], data: {
+                          turbo_method: :delete,
+                          turbo_confirm: "Are you sure?"
+                        } %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
 <% end %>
+<br>
+
+<%= link_to "Add comment", new_article_comment_path(@article) %>
 
 
 

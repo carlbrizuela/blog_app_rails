@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_article
-  before_action :set_comment, except: [ :create, :index, :new]
+  before_action :set_comment, except: [ :create, :index, :new ]
 
   def index; end
 
