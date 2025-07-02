@@ -1,3 +1,8 @@
-<h1>Edit Article</h1>
-<%= render "form", article: @article %>
-<%= link_to "Back", article_path %>
+<div class="w-full mx-auto">
+  <%= render "home" %>
+  <h3 class="mt-2 text-3xl font-bold">Edit Article</h3>
+  <%= link_to "⟵ Back to article", article_path(@article), class: "back" %>
+  <div class="w-full mx-auto mt-4 mb-8">
+    <%= render "form", article: @article %>
+  </div>
+</div>

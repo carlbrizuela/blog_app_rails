@@ -1,43 +1,36 @@
-<%= link_to "Back to article", article_path(@article) %>
-<br>
-
-<% flash.each do |type, msg| %>
-  <div>
-    <%= msg %>
-  </div>
-<% end %>
-
-<h1><%= @article.title %></h1>
-
-<h2>Comments</h2>
-<% if @article.comments.empty? %> 
-  <div>No comments</div> 
-  <br>
-<% else %>
-  <table>
+<div class="w-full flex flex-col mx-auto">
+  <% flash.each do |type, msg| %>
+    <% if msg.include? "deleted" %>
+      <div class="flex mx-auto justify-center w-full p-2 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50" role="alert">
+    <% else %>
+      <div class="flex justify-center w-full mx-auto p-2 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50" role="alert">
+    <%end%>
+        <%= msg %>
+      </div>
+  <% end %>
+  <%= render "articles/home" %>
+  <h1 class="mb-2 text-[50px] font-extrabold"><%= @article.title %></h1>
+  <%= link_to "⟵ Back to article", article_path(@article), class: "back" %>
+  <h3 class="mt-8 mb-4 text-3xl font-bold">Comments</h3>
+  <% if @article.comments.empty? %> 
+    <div>No comments</div>
+  <% else %>
     <% @article.comments.each do |comment| %>
-      <tr>
-        <td>
-          <strong>Commenter:</strong>
-          <%= comment.commenter %>
-          <br>
-          <strong>Comment:</strong>
-          <%= comment.body %>
-        </td>
-        <td style="width:10%">
-          <%= link_to "Edit", edit_article_comment_path(@article, comment) %>
-          <%= link_to "Delete", [comment.article, comment], data: {
-                          turbo_method: :delete,
-                          turbo_confirm: "Are you sure?"
-                        } %>
-        </td>
-      </tr>
+      <div class="border-gray-200 border-t border-b p-2 w-full mx-auto">
+          <strong><%= comment.commenter %></strong><br>
+          <p class="ml-2"><%= comment.body %></p>
+          <div class="mt-6">
+            <%= link_to "Edit", edit_article_comment_path(@article, comment), class:"option" %>
+            <span> | </span>
+            <%= link_to "Delete", [comment.article, comment], class:"option", data: {
+                            turbo_method: :delete,
+                            turbo_confirm: "Are you sure?"
+                          } %>
+          </div>
+      </div>
     <% end %>
-  </table>
-<% end %>
-<br>
-
-<%= link_to "Add comment", new_article_comment_path(@article) %>
-
+  <% end %>
+  <%= link_to "Add comment", new_article_comment_path(@article), class:"mt-2 text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" %>
+</div>
 
 

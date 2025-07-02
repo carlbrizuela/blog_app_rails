@@ -1,16 +1,27 @@
-<%= link_to "Home", articles_path %>
+<div class="flex flex-col w-full mx-auto">
 
-<h1><%= @article.title %></h1>
-<p><%= @article.body %></p>
+  <% flash.each do |type, msg| %>
+    <div class="flex justify-center w-full mx-auto p-2 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50" role="alert">
+      <%= msg %>
+    </div>
+  <% end %>  
 
-<ul>
-  <li><%= link_to "Edit", edit_article_path(@article) %></li>
-  <li><%= link_to "Destroy", article_path(@article), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %></li>
-</ul>
+   <%= render "home" %>
+   
+  <div class="mt-2 border-b pb-0 border-gray-500 mb-2 px-2">
+    <h1 class="mb-4 text-[40px] font-extrabold"><%= @article.title %></h1>
+    <p><%= @article.body %></p>
+    <div class="mt-6 mb-2">
+      <%= link_to "Edit", edit_article_path(@article), class:"option" %>
+      <span>|</span>
+      <%= link_to "Delete", article_path(@article), class:"option", data: {
+                          turbo_method: :delete,
+                          turbo_confirm: "Are you sure?"
+                          } %> 
+      <span>|</span>
+      <%= link_to "Show comments", article_comments_path(@article), class:"option" %>
+    </div>
+  </div>  
 
-<%= link_to "See comments", article_comments_path(@article) %>
-<br>
-<%= link_to "Add comment", new_article_comment_path(@article) %>
+  <%= link_to "Add comment", new_article_comment_path(@article), class:"text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" %>
+</div>

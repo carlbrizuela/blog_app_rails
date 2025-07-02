@@ -1,6 +1,10 @@
-<%= link_to "Back to article", article_path(@article) %>
-
-<h1>Add Comment</h1>
-<%= render "form", article: @article %>
-<%= link_to "See comments", article_comments_path %>
+<div class="w-full mx-auto">
+  <div class="w-full border-b pb-2 pl-2">
+    <%= link_to "Home", articles_path%>
+  </div>
+  <h1 class="text-[50px] font-extrabold"><%= @article.title %></h1>
+  <%= link_to "⟵ Back to article", article_path(@article), class: "back" %>
+  <h3 class="mt-4 mb-8 text-3xl font-bold">Add Comment</h3>
+  <%= render "form", article: @article %>
+</div>
 

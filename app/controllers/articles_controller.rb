@@ -15,7 +15,7 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
 
     if @article.save
-      redirect_to @article
+      redirect_to @article, notice: "\"#{@article.title}\" article created at #{@article.created_at}."
     else
       render :new, status: :unprocessable_entity
     end
@@ -33,7 +33,7 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article.destroy
-    redirect_to articles_path, status: :see_other, notice: "Article deleted"
+    redirect_to articles_path, status: :see_other, notice: "\"#{@article.title}\" article was deleted."
   end
 
   private

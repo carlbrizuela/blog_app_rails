@@ -1,17 +1,26 @@
-<% flash.each do |type, msg| %>
-  <div class="flash">
-    <%= msg %>
-  </div>
-<% end %>
-
-<h1>Articles</h1>
-
-<ul>
-  <% @articles.each do |article| %>
-    <li>
-      <%= link_to article.title, article %>
-    </li>
+<div class="w-full">
+  <% flash.each do |type, msg| %>
+    <div class="flex justify-center w-full mx-auto p-2 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50" role="alert">
+      <%= msg %>
+    </div>
   <% end %>
-</ul>
 
-<%= link_to "New Article", new_article_path %>
+  <div class="flex flex-col w-full mx-auto">
+    <div class="flex flex-row justify-between mb-4">
+       <h1 class="text-[30px] font-extrabold">Articles</h1>
+      <%= link_to "Create New Article", new_article_path, class: "max-h-fit text-green-700 hover:text-white border border-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-3 py-2 text-center" %>
+    </div>
+    <% @articles.each do |article| %>
+      <div class="mx-auto w-full flex flex-col mb-2">
+        <a href="articles/<%=article.id%>" class="max-h-24 h-24 border border-gray-400 bg-white rounded-lg p-4 flex flex-col justify-between leading-normal hover:bg-gray-100">
+          <div class="text-gray-900 font-bold text-xl mb-2">
+            <%= article.title %>
+          </div>
+          <p class="text-gray-700 text-base truncate">
+            <%= article.body %>
+          </p>
+        </a>
+      </div>
+    <% end %>
+  </div>
+</div>

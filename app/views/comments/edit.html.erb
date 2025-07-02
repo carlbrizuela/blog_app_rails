@@ -1,3 +1,8 @@
-<h1>Edit Comment</h1>
-<%= render 'form' %>
-<%= link_to "Back", article_comments_path(@article, @comment) %>
+<div class="w-full mx-auto">
+  <%= render "articles/home" %>
+  <h1 class="text-[50px] font-extrabold"><%= @article.title %></h1>
+  <%= link_to "⟵ Back to article", article_path(@article), class: "back" %><br>
+  <%= link_to "⟵ Back to comments", article_comments_path(@article, @comment), class: "back" %>
+  <h3 class="mt-4 mb-8 text-3xl font-bold">Edit Comment</h3>
+  <%= render "form"%>
+</div>

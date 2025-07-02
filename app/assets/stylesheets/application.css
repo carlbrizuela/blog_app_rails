@@ -23,3 +23,25 @@ table, th, td {
   border-collapse: collapse;
   padding: 5px;
 }
+
+.back{
+  font-size: small;
+}
+.back:hover{
+  color: blue;
+  text-decoration: underline;
+}
+.option{
+  color: slategray;
+  font-size: 13px;
+  padding-inline: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  text-align: center;
+}
+
+.option:hover{
+  background-color: gray;
+  border-radius: 5px;
+  color: white
+}
